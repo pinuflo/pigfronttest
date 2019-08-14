@@ -1,0 +1,94 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Game</h3>
+    </div>
+    <div class="panel-body">
+
+
+        <span class="octanoGamePanel center-block" *ngIf="gamePhase == 0"> 
+
+            <div class="row">    
+                <div class="col-md-9"> 
+                    <form [formGroup]="playerFormgroup" class="center-block form-group" style="padding:30px;" >
+          
+                        <label><h4>Player1:</h4></label>
+                        <input formControlName="player1Name" class="form-control input-lg"  />
+                        <br>
+                        <label><h4>Player2:</h4></label>
+                        <input formControlName="player2Name" class="form-control input-lg"  />
+                        <br>
+                    
+                        <button (click)="play()" [disabled]="!playerFormgroup.valid" type="button" class="btn btn-lg btn-success">
+                          <h1>Start game!</h1>
+                        </button>
+                        
+                        <p *ngIf="loading">Loading...</p>
+                        <p *ngIf="errorMsg" class="red">{{errorMsg}}</p>
+                    
+                      </form>
+                </div>
+                <div class="col-md-3"> 
+                    <configuration (change)="updateMoves()" ></configuration>
+                </div>
+            </div>
+        </span>
+          
+        <span class="octanoGamePanel center-block form-group" *ngIf="gamePhase == 1"> 
+        
+        
+            <h2>
+              Round #{{round}}
+            </h2>
+            
+            <span [hidden]="turn!=0">
+              
+              
+        
+              <h3>Your turn {{player1}}</h3>
+              <select class="form-control input-lg" [(ngModel)]="moveA"  >
+                <option *ngFor="let movementTypes of moves" >
+                    {{movementTypes.move}}
+                </option>
+              </select>
+              <br>
+
+              <button [disabled]="!moveA" (click)="nextTurn()" class="btn btn-lg btn-primary">
+                <h4>Next turn!</h4>
+              </button>
+
+            </span>
+        
+        
+            <span [hidden]="turn!=1" > 
+        
+                <h3>Your turn {{player2}}</h3>
+                <select class="form-control input-lg"   [(ngModel)]="moveB" >
+                  <option *ngFor="let movementTypes of moves" >
+                      {{movementTypes.move}}
+                  </option>
+                </select>
+                <br>
+                <button [disabled]="!moveA" (click)="nextTurn();finishRound();"  class="btn btn-lg btn-primary">
+                    <h4>Next round!</h4>
+                </button>
+            </span>
+        
+        
+        </span>
+                    
+        <span class="octanoGamePanel center-block" *ngIf="gamePhase == 2"> 
+        
+        
+            <h2>
+              WE HAVE A WINNER {{gameWinner}}
+            </h2>
+            <button  (click)="reset()" [disabled]="!playerFormgroup.valid"  class="btn btn-lg btn-primary">
+                <h1>Play again!</h1>
+            </button>
+
+        
+        </span>
+    
+    </div>
+  </div>
+

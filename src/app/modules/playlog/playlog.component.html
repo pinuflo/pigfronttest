@@ -1,0 +1,13 @@
+<div class="panel panel-primary" *ngIf="turns.length>0">
+    <div class="panel-heading">
+        <h3 class="panel-title">Game Log</h3>
+    </div>
+    <div class="panel-body">
+        <ul>
+          <li *ngFor="let turn of turns"> <p>{{turn.Detail}} </p> </li>
+        </ul>
+    </div>
+  </div>
+
+
+

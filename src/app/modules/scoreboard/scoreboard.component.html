@@ -1,0 +1,28 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+      <h3 class="panel-title">Scoreboard (Top #5)</h3>
+  </div>
+  <div class="panel-body">
+
+      <table class="table table-striped">
+        <thead>
+          <th scope="col">Player</th><th scope="col">#Wins</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let info of playersInfo">
+            <td>
+              {{info.name}}
+            </td>
+            <td>{{info.wins}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+      <button (click)="refresh()"  type="button" class="btn btn-lg btn-primary">
+        Refresh
+      </button>
+  </div>
+</div>
+
+
+
